@@ -1,19 +1,24 @@
 #include <iostream>
 #include <cstdlib>
 #include <thread>
+
 #include "Game.hpp"
+#include "Utils.hpp"
+
+#define LOGGER_ENABLE true
 
 using namespace std;
 
-//wait for `secs` seconds
-
-
 int main(int argc, char** argv)
 {
-	
+#if !(LOGGER_ENABLE)
 	Game game;
-	std::cout << "All done!" << std::endl;
-	this_thread::sleep_for(chrono::milliseconds(3000));
+#else
+	Logger lgr;
+	Game game(*lgr);
+	lgr.Log("All done!");
+#endif
+	WaitSecs(3);
 
-	return 0;
+	return ClearTerm();
 }
