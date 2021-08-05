@@ -10,7 +10,7 @@
 
 class Game{
     public:
-        Game(uint8_t new_width = 91, uint8_t new_height = 33);
+        Game(Logger *lgr = nullptr, uint8_t new_width = 91, uint8_t new_height = 33);
         ~Game();
         void StartGame();
         void StopGame();
@@ -18,11 +18,13 @@ class Game{
         void Update();
         void Wait(uint8_t secs);
         void WaitMillis(uint16_t millis);
+        void Log(std::string);
 
         std::unique_ptr<std::thread> t_run = nullptr;
-        std::shared_ptr<Console> term;
+        std::shared_ptr<Console> term = nullptr;
         bool is_running_ = false;
         uint8_t width, height;
+        Logger *logger;
 };
 
 #endif

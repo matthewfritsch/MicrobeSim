@@ -1,7 +1,9 @@
 #include "Game.hpp"
 
-Game::Game(uint8_t new_width, uint8_t new_height): width(new_width), height(new_height)
+Game::Game(Logger *lgr, uint8_t new_width, uint8_t new_height): width(new_width), height(new_height)
 {
+    // t_run = nullptr;
+    logger = lgr;
     is_running_ = true;
     term = std::make_shared<Console>();
     StartGame();
@@ -38,4 +40,10 @@ void Game::Update()
 void Game::WaitMillis(uint16_t millis)
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(millis));
+}
+
+void Game::Log(std::string toPrint)
+{
+    if(!logger) return;
+    logger->Log(toPrint);
 }
