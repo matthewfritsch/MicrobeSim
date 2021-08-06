@@ -31,7 +31,6 @@ void Game::Update()
     while(is_running_)
     {
         //lots of logic for vclass
-
         term->Update();
         WaitMillis(REFRESH_RATE_MS);
     }

@@ -3,8 +3,10 @@
 
 #include <thread>
 #include <memory>
+#include <vector>
 
 #include "Console.hpp"
+#include "Plague.hpp"
 
 #define REFRESH_RATE_MS 1000/65
 
@@ -20,8 +22,9 @@ class Game{
         void WaitMillis(uint16_t millis);
         void Log(std::string);
 
-        std::unique_ptr<std::thread> t_run = nullptr;
-        std::shared_ptr<Console> term = nullptr;
+        std::vector<Plague> plagues;
+        std::unique_ptr<std::thread> t_run;
+        std::shared_ptr<Console> term;
         bool is_running_ = false;
         uint8_t width, height;
         Logger *logger;
