@@ -14,9 +14,9 @@ int main(int argc, char** argv)
 #if !(LOGGER_ENABLE)
 	Game game;
 #else
-	Logger lgr;
-	Game game(*lgr);
-	lgr.Log("All done!");
+	Logger *lgr = new Logger();
+	Game game(lgr);
+	lgr->Log("All done!");
 #endif
 	WaitSecs(3);
 
