@@ -3,7 +3,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-Console::Console(Logger *lgr = nullptr) : logger(lgr)
+Console::Console(Logger *lgr) : logger(lgr)
 {
     Coord max_term = GetTerminalSize(term_width_, term_height_);
     Log("Found console with dimensions " + std::to_string(term_width_) + "x" + std::to_string(term_height_));
