@@ -4,6 +4,8 @@
 
 #include "Utils.hpp"
 
+#define BLUE "\033[0;34m"
+#define CLEAR_COLOR "\033[0m"
 #define U8BI_MAX 0b11111111
 
 struct Coord{

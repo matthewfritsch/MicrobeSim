@@ -36,9 +36,10 @@ void Console::Update()
 {
     GetTerminalSize(term_width_, term_height_);
     frame_ctr++;
+    std::cout << BLUE;
     for(uint8_t line_num = 0; line_num < term_height_; line_num++)
     {
-        std::cout << std::endl;
+        std::cout << "\n";
         for(uint8_t x = 0; x < term_width_; x++)
         {
             if(x == term_width_-1 && line_num == term_height_-1)
@@ -52,6 +53,7 @@ void Console::Update()
                 std::cout << " ";
         }
     }
+    std::cout << CLEAR_COLOR;
 }
 
 char Console::GetItemAt(Coord c)
