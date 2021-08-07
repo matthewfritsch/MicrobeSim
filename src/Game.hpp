@@ -12,7 +12,7 @@
 
 class Game{
     public:
-        Game(Logger *lgr = nullptr, uint8_t new_width = 91, uint8_t new_height = 33);
+        Game(std::shared_ptr<Logger> lgr = nullptr, uint8_t new_width = 91, uint8_t new_height = 33);
         ~Game();
         void StartGame();
         void StopGame();
@@ -25,9 +25,10 @@ class Game{
         std::vector<Plague> plagues;
         std::unique_ptr<std::thread> t_run;
         std::shared_ptr<Console> term;
+        std::shared_ptr<Logger> logger;
+
         bool is_running_ = false;
         uint8_t width, height;
-        Logger *logger;
 };
 
 #endif
