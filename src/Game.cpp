@@ -23,7 +23,6 @@ void Game::StartGame()
     if(!is_running_) return;
     if(t_run != nullptr) return;
     t_run = std::make_unique<std::thread>([this] {Update();});
-    RunPlagues();
 }
 
 void Game::Update()
