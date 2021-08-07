@@ -1,4 +1,4 @@
-//TODO write the entire Virus class
+//TODO write the entire Microbe class
 /*
 Placed at a random location, it can live in states: ACTIVE, IDLE, or DEAD
 
@@ -16,8 +16,8 @@ Behavior:
             - Do not pass food on beyond it
 */
 
-#ifndef PLAGUE_HPP
-#define PLAGUE_HPP
+#ifndef MICROBE_HPP
+#define MICROBE_HPP
 
 #include <vector>
 
@@ -32,20 +32,22 @@ enum VStatus{
     DEAD
 };
 
-struct PlaguePxl{
+struct MicrobePxl{
     Coord c;
     VStatus status;
-    inline PlaguePxl(): c(), status(UNINITIALIZED){}
-    inline PlaguePxl(VStatus newst): c(), status(newst){}
+    inline MicrobePxl(): c(), status(UNINITIALIZED){}
+    inline MicrobePxl(VStatus newst): c(), status(newst){}
 };
 
-class Plague{
+class Microbe{
     public:
-        Plague();
-        ~Plague();
-        std::vector<PlaguePxl> GetLoc();
+        Microbe(std::shared_ptr<Logger> lgr = nullptr);
+        ~Microbe();
+        std::vector<MicrobePxl> GetLoc();
+    
     private:
-        std::vector<PlaguePxl> thisLoc;
+        std::vector<MicrobePxl> thisLoc;
+        std::shared_ptr<Logger> logger;
 };
 
 #endif
