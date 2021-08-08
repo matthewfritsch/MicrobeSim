@@ -7,7 +7,8 @@
 #include <iostream>
 #include <thread>
 
-std::string betterSubstr(std::string, uint16_t front, uint16_t back);
+std::string restOfSubstr(std::string word, uint16_t front);
+std::string betterSubstr(std::string word, uint16_t front, uint16_t back);
 bool ClearTerm();
 void Print(std::string);
 void PrintFlush(std::string);
@@ -18,9 +19,12 @@ void WaitMillis(uint16_t millis);
 class Logger
 {
     public:
+        Logger();
+        ~Logger();
         void Log(std::string toWrite);
     private:
         bool _logged = false;
+        std::ofstream out;
 };
 
 
