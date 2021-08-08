@@ -2,6 +2,7 @@
 #define UTILS_HPP
 
 #define LOGFILE "log.txt"
+#define U8BI_MAX 0b11111111
 
 #include <fstream>
 #include <iostream>
@@ -15,6 +16,12 @@ void PrintFlush(std::string);
 void PrintLn(std::string);
 void WaitSecs(uint8_t secs);
 void WaitMillis(uint16_t millis);
+
+struct Coord{
+    uint8_t x, y;
+    inline Coord() : x(U8BI_MAX), y(U8BI_MAX){}
+    inline Coord(uint8_t nx, uint8_t ny) : x(nx), y(ny){}
+};
 
 class Logger
 {
