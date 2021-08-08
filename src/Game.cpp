@@ -4,7 +4,7 @@ Game::Game(std::shared_ptr<Logger> lgr, uint8_t new_width, uint8_t new_height): 
 {
     // t_run = nullptr;
     is_running_ = true;
-    term = std::make_shared<Console>();
+    term = std::make_shared<Console>(logger);
     StartGame();
 }
 
