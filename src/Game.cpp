@@ -1,9 +1,10 @@
 #include "Game.hpp"
 
-Game::Game(uint8_t new_width, uint8_t new_height): width(new_width), height(new_height)
+Game::Game(std::shared_ptr<Logger> lgr, uint8_t new_width, uint8_t new_height): logger(lgr), width(new_width), height(new_height)
 {
+    // t_run = nullptr;
     is_running_ = true;
-    term = std::make_shared<Console>();
+    term = std::make_shared<Console>(logger);
     StartGame();
 }
 
@@ -28,8 +29,6 @@ void Game::Update()
 {
     while(is_running_)
     {
-        //lots of logic for vclass
-
         term->Update();
         WaitMillis(REFRESH_RATE_MS);
     }
@@ -38,4 +37,10 @@ void Game::Update()
 void Game::WaitMillis(uint16_t millis)
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(millis));
+}
+
+void Game::Log(std::string toPrint)
+{
+    if(!logger) return;
+    logger->Log(toPrint);
 }

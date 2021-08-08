@@ -3,24 +3,30 @@
 
 #include <thread>
 #include <memory>
+#include <vector>
 
 #include "Console.hpp"
+#include "Microbe.hpp"
 
 #define REFRESH_RATE_MS 1000/65
 
 class Game{
     public:
-        Game(uint8_t new_width = 91, uint8_t new_height = 33);
+        Game(std::shared_ptr<Logger> lgr = nullptr, uint8_t new_width = 91, uint8_t new_height = 33);
         ~Game();
         void StartGame();
         void StopGame();
     private:
+        void Log(std::string);
         void Update();
         void Wait(uint8_t secs);
         void WaitMillis(uint16_t millis);
 
-        std::unique_ptr<std::thread> t_run = nullptr;
+        std::vector<Microbe> microbes;
+        std::unique_ptr<std::thread> t_run;
         std::shared_ptr<Console> term;
+        std::shared_ptr<Logger> logger;
+
         bool is_running_ = false;
         uint8_t width, height;
 };
