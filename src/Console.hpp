@@ -17,7 +17,7 @@ struct Coord{
 class Console
 {
     public:
-        Console(Logger *lgr = nullptr);
+        Console(std::shared_ptr<Logger> lgr = nullptr);
         ~Console();
         char GetItemAt(Coord c);
         void Update();
@@ -30,7 +30,7 @@ class Console
 
         uint16_t frame_ctr = 0;
         std::string *board = nullptr;
-        Logger *logger;
+        std::shared_ptr<Logger> logger;
         uint8_t term_width_;
         uint8_t term_height_;
 };
