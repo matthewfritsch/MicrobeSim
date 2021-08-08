@@ -57,8 +57,6 @@ Logger::~Logger()
 
 void Logger::Log(std::string toWrite)
 {
-    std::cout << "Logging..." << std::endl;
-    WaitSecs(1);
     out << toWrite << '\n';
     if(!_logged)
     {
