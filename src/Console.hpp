@@ -1,18 +1,13 @@
-
 #ifndef CONSOLE_HPP
 #define CONSOLE_HPP
 
+#include <memory>
+
+#include "Board.hpp"
 #include "Utils.hpp"
 
 #define BLUE "\033[0;34m"
 #define CLEAR_COLOR "\033[0m"
-#define U8BI_MAX 0b11111111
-
-struct Coord{
-    uint8_t x, y;
-    inline Coord() : x(U8BI_MAX), y(U8BI_MAX){}
-    inline Coord(uint8_t nx, uint8_t ny) : x(nx), y(ny){}
-};
 
 class Console
 {
@@ -29,11 +24,10 @@ class Console
         void Log(std::string);
 
         uint16_t frame_ctr = 0;
-        std::string *board = nullptr;
+        std::unique_ptr<Board> board;
         std::shared_ptr<Logger> logger;
         uint8_t term_width_;
         uint8_t term_height_;
 };
-
 
 #endif

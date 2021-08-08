@@ -8,12 +8,12 @@ Console::Console(std::shared_ptr<Logger> lgr) : logger(lgr)
     Coord max_term = GetTerminalSize(term_width_, term_height_);
     lgr->Log("Found console with dimensions " + std::to_string(term_width_) + "x" + std::to_string(term_height_));
     
-    board = new std::string[term_height_];
+    board = std::make_unique<Board>(term_width_, term_height_);
 }
 
 Console::~Console()
 {
-    delete[] board;
+    board.reset();
 }
 
 Coord Console::GetTerminalSize(uint8_t &wid, uint8_t &hei)
@@ -22,7 +22,8 @@ Coord Console::GetTerminalSize(uint8_t &wid, uint8_t &hei)
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &wsz);
     wid = wsz.ws_col;
     hei = wsz.ws_row;
-    Coord c(wsz.ws_col, wsz.ws_row);
+    Coord c(wid, hei);
+    Log("Found " + std::to_string(wid) + " and " + std::to_string(hei));
     return c;
 }
 
@@ -42,15 +43,12 @@ void Console::Update()
         std::cout << "\n";
         for(uint8_t x = 0; x < term_width_; x++)
         {
+            Coord c(x,line_num);
+            std::cout << GetItemAt(c);
             if(x == term_width_-1 && line_num == term_height_-1)
             {
                 std::cout.flush();
-                std::cout << "X";
             }
-            else if(x == 0 || line_num == 0 || x == term_width_-1 || line_num == term_height_-1)
-                std::cout << "X";
-            else
-                std::cout << " ";
         }
     }
     std::cout << CLEAR_COLOR;
@@ -59,7 +57,7 @@ void Console::Update()
 char Console::GetItemAt(Coord c)
 {
     if(!InBounds(c)) return 0;
-    return board[c.y][c.x];
+    return board->GetAt(c);
 }
 
 bool Console::InBounds(Coord c)
