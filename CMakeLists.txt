@@ -8,5 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 add_subdirectory(src)
 
+set(CMAKE_CXX_FLAGS "-pthread")
+
 add_executable(MicrobeApp src/main.cpp)
 target_link_libraries(MicrobeApp LINK_PUBLIC MicrobeSrc)
