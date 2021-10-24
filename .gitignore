@@ -1,0 +1,12 @@
+CMakeBuildOutput
+CMakeCache.txt
+CMakeFiles/
+CMakeOutput
+Makefile
+bin/
+cmake_install.cmake
+log.txt
+src/CMakeFiles/
+src/Makefile
+src/cmake_install.cmake
+src/libMicrobeSrc.a
